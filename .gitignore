@@ -1,0 +1,11 @@
+# Node modules
+node_modules/
+
+# IDE settings
+.idea/
+
+# TypeScript compiled directory
+dist/
+
+# Environment settings
+.env
