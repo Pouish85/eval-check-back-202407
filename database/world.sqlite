@@ -1,0 +1,26 @@
+-- Create Region table
+CREATE TABLE Region (
+  id INTEGER PRIMARY KEY,
+  name TEXT NOT NULL
+);
+
+-- Create Country table
+CREATE TABLE Country (
+  id INTEGER PRIMARY KEY,
+  name TEXT NOT NULL,
+  countryCode TEXT NOT NULL,
+  countryName TEXT NOT NULL,
+  countryFlag TEXT NOT NULL,
+  regionId INTEGER,
+  FOREIGN KEY(regionId) REFERENCES Region(id)
+);
+
+-- Insert data into Region table
+INSERT INTO Region (id, name) VALUES (1, 'North America');
+INSERT INTO Region (id, name) VALUES (2, 'Europe');
+
+-- Insert data into Country table
+INSERT INTO Country (id, name, countryCode, countryName, countryFlag, regionId) VALUES (1, 'USA', 'US', 'United States', '🇺🇸', 1);
+INSERT INTO Country (id, name, countryCode, countryName, countryFlag, regionId) VALUES (2, 'Canada', 'CA', 'Canada', '🇨🇦', 1);
+INSERT INTO Country (id, name, countryCode, countryName, countryFlag, regionId) VALUES (3, 'France', 'FR', 'France', '🇫🇷', 2);
+INSERT INTO Country (id, name, countryCode, countryName, countryFlag, regionId) VALUES (4, 'Germany', 'DE', 'Germany', '🇩🇪', 2);
