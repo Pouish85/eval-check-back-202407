@@ -1,5 +1,4 @@
 import { Resolver, Query, Mutation, Arg } from "type-graphql";
-import { In } from "typeorm";
 import { Country } from "../entities/Country";
 
 @Resolver(Country)
@@ -11,7 +10,7 @@ export default class CountryResolver {
         });
     }
 
-    @Query(() => Country, { nullable: true })
+    @Query(() => Country, { nullable: false })
     async country(@Arg("countryCode") countryCode: string) {
         return Country.findOne({
             relations: { region: true },
