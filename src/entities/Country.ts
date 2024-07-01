@@ -17,10 +17,6 @@ export class Country extends BaseEntity {
 
     @Field()
     @Column()
-    name: string;
-
-    @Field()
-    @Column()
     countryCode: string;
 
     @Field()
@@ -31,7 +27,7 @@ export class Country extends BaseEntity {
     @Column()
     countryFlag: string;
 
-    @Field(() => Region)
+    @Field(() => Region, { nullable: true })
     @ManyToOne(() => Region, (region) => region.countries)
     region: Region;
 }
