@@ -11,6 +11,14 @@ export default class CountryResolver {
         });
     }
 
+    @Query(() => [Country])
+    async countriesByRegion(@Arg('regionId') regionId: number) {
+        return await Country.find({
+            relations: { region: true },
+            where: { region: { id: regionId} },
+        });
+    }
+
     @Query(() => Country, { nullable: false })
     async country(@Arg("countryCode") countryCode: string) {
         return Country.findOne({
