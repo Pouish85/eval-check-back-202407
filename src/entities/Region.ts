@@ -2,14 +2,15 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  OneToMany
+  OneToMany,
+  BaseEntity
 } from "typeorm";
 import { Field, ID, ObjectType } from "type-graphql";
 import { Country } from "./Country";
 
 @ObjectType()
 @Entity()
-export class Region {
+export class Region extends BaseEntity{
   @Field(() => ID)
   @PrimaryGeneratedColumn()
   id: number;

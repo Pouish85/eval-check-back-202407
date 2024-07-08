@@ -1,5 +1,6 @@
 import { Resolver, Query, Mutation, Arg } from "type-graphql";
 import { Country } from "../entities/Country";
+import { Region } from "../entities/Region";
 
 @Resolver(Country)
 export default class CountryResolver {
@@ -22,13 +23,19 @@ export default class CountryResolver {
     async createCountry(
         @Arg("countryCode") countryCode: string,
         @Arg("countryName") countryName: string,
-        @Arg("countryFlag") countryFlag: string
+        @Arg("countryFlag") countryFlag: string,
+        @Arg('regionId') regionId: number
     ) {
-        const country = Country.create({
-            countryCode,
-            countryName,
-            countryFlag,
-        });
-        return Country.save(country);
+        const region = await Region.findOne({where : {id: regionId}});
+        if (!region) {
+            throw new Error('Region not found');
+        }
+        const country = new Country();
+        country.countryCode = countryCode;
+        country.countryName = countryName;
+        country.countryFlag = countryFlag;
+        country.region = region;
+        await Country.save(country);
+        return country;
     }
 }
